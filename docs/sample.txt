@@ -1,0 +1,2 @@
+This is a sample document. Drop your own PDFs or text files into the docs/ folder
+and ask the assistant about them.

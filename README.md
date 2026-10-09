@@ -15,7 +15,9 @@ uv run main.py         # http://127.0.0.1:7860
 ```
 main.py            # Gradio ChatInterface, streams agent output
 app/config.py      # settings loaded from .env
-app/agent.py       # Agent + list_docs / read_doc tools
+app/models.py      # model setup shared by all agents
+app/chat_agent.py  # chat Agent + list_docs / read_doc tools
+app/intake_agent.py # Intake agent: clarifying questions -> JSON brief
 app/documents.py   # PDF (pypdf) and text file readers
 docs/              # put your .pdf / .txt / .md files here
 ```

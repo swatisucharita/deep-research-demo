@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1060" width="960" height="1060">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:24px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.t2{font-size:14px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.w{font-size:12px;fill:#c9c7bf}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.05em;fill:#a8a69e}
+.o{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;fill:#5cc58a}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.gedge{fill:none;stroke:#5cc58a;stroke-width:2}
+.aedge{fill:none;stroke:#d9a441;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.web{fill:#17301f;stroke:#5cc58a;stroke-width:1.5}
+.ask{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+.dec{fill:#2a1f3a;stroke:#b391f0;stroke-width:1.5}
+.rep{fill:#f6f5f1;stroke:#c9c7bf;stroke-width:1.5}
+.chip{fill:#ffffff;stroke:#c9c7bf;stroke-width:1}
+.ct{font-size:11px;fill:#1f1e1c}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5a5953"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5cc58a"/></marker>
+  <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d9a441"/></marker>
+</defs>
+
+<rect width="960" height="1060" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · COMPLETE WORKFLOW</text>
+<text class="h" x="40" y="68">Feature research workflow</text>
+<text class="s" x="350" y="67">from a feature request in the chat to a go / no go business report</text>
+
+<!-- 1. app -->
+<rect class="box" x="60" y="92" width="840" height="58" rx="10"/>
+<text class="t" x="80" y="116">Gradio app · uv run main.py</text>
+<text class="s" x="80" y="137">You type a feature request in the chat (left), e.g. "Send class reminders on WhatsApp" · live Agent execution panel (right)</text>
+<path class="edge" d="M360 150V168" marker-end="url(#a)"/>
+
+<!-- 2. product context -->
+<rect class="box" x="60" y="170" width="600" height="50" rx="10"/>
+<text class="t" x="80" y="192">Load product context · code</text>
+<text class="s" x="290" y="192">docs/*.pdf → plain text (FitSlot-Product-Summary.pdf)</text>
+<text class="s" x="80" y="210">Goes into the Intake prompt as the source of product facts</text>
+<path class="edge" d="M360 220V238" marker-end="url(#a)"/>
+
+<!-- 3. intake -->
+<rect class="hot" x="60" y="240" width="600" height="112" rx="10"/>
+<text class="t" x="80" y="264">Intake agent · gpt-4.1-mini</text>
+<text class="w" x="80" y="286">Turns the request into a clear brief, using only the product doc and your words.</text>
+<text class="w" x="80" y="304">Asks only when who uses it or what it does is unclear; never assumes.</text>
+<text class="o" x="80" y="326">brief: refined_query · app_summary · feature_summary</text>
+<text class="o" x="80" y="342">       unknowns · 3 sub_queries (pain point, user voice, market)</text>
+
+<!-- question loop -->
+<rect class="ask" x="690" y="240" width="210" height="112" rx="10"/>
+<text class="t" x="706" y="264">Clarifying question</text>
+<text class="s" x="706" y="286">One per reply, up to 5</text>
+<text class="s" x="706" y="304">Shown in the chat; your</text>
+<text class="s" x="706" y="320">answer runs Intake again</text>
+<text class="s" x="706" y="340">No report yet</text>
+<path class="aedge" d="M660 280H688" marker-end="url(#ay)"/>
+<path class="aedge" d="M688 320H662" marker-end="url(#ay)" style="stroke-dasharray:5 4"/>
+<text class="m" x="664" y="272" style="fill:#d9a441;font-size:9px">ask</text>
+
+<!-- ready -> fork -->
+<path class="gedge" d="M360 352V378"/>
+<text class="m" x="370" y="370" style="fill:#5cc58a">ready</text>
+<path class="gedge" d="M193 378H767"/>
+<path class="gedge" d="M193 378V404" marker-end="url(#ag)"/>
+<path class="gedge" d="M480 378V404" marker-end="url(#ag)"/>
+<path class="gedge" d="M767 378V404" marker-end="url(#ag)"/>
+<text class="m" x="500" y="372" style="fill:#5cc58a">in parallel · asyncio.gather</text>
+
+<!-- 4a competitor -->
+<rect class="web" x="60" y="406" width="266" height="206" rx="10"/>
+<text class="t2" x="76" y="430">Competitor agent</text>
+<text class="s" x="76" y="449">gpt-6-luna · web search</text>
+<text class="w" x="76" y="473">1 search → up to 5 competitors</text>
+<text class="w" x="76" y="491">Unclear → 1 recheck each, on</text>
+<text class="w" x="76" y="507">their own site (parallel, once)</text>
+<text class="w" x="76" y="527">Yes only if who · what · where</text>
+<text class="w" x="76" y="543">are confirmed by a source</text>
+<text class="w" x="76" y="563">Code drops links the search</text>
+<text class="w" x="76" y="579">never returned</text>
+<text class="o" x="76" y="601">→ has it? per competitor</text>
+
+<!-- 4b demand -->
+<rect class="web" x="347" y="406" width="266" height="206" rx="10"/>
+<text class="t2" x="363" y="430">Demand agent</text>
+<text class="s" x="363" y="449">gpt-6-luna · web search</text>
+<text class="w" x="363" y="473">1 search, Intake's 3 sub-queries,</text>
+<text class="w" x="363" y="489">all domains</text>
+<text class="w" x="363" y="509">Signals: requests, complaints,</text>
+<text class="w" x="363" y="525">workarounds, market data</text>
+<text class="w" x="363" y="545">Code sets source from the URL</text>
+<text class="w" x="363" y="561">(forum · review · news count)</text>
+<text class="w" x="363" y="579">and computes the score 1–5</text>
+<text class="o" x="363" y="601">→ score + signals</text>
+
+<!-- 4c feasibility -->
+<rect class="web" x="634" y="406" width="266" height="206" rx="10"/>
+<text class="t2" x="650" y="430">Feasibility agent</text>
+<text class="s" x="650" y="449">gpt-6-luna · local read-only tools</text>
+<text class="w" x="650" y="473">ARCHITECTURE.md + generated map</text>
+<text class="w" x="650" y="489">of the FitSlot repo</text>
+<text class="w" x="650" y="509">list_files · search_code · read_file</text>
+<text class="w" x="650" y="525">(up to 15 turns, read budget)</text>
+<text class="w" x="650" y="545">Code verifies every file:line and</text>
+<text class="w" x="650" y="561">turns S/M/L into hours, people,</text>
+<text class="w" x="650" y="577">weeks</text>
+<text class="o" x="650" y="601">→ changes, architecture, effort</text>
+
+<!-- merge -->
+<path class="edge" d="M193 612V630H767V612"/>
+<path class="edge" d="M480 612V630"/>
+<path class="edge" d="M480 630V650" marker-end="url(#a)"/>
+<text class="m" x="490" y="645">3 reports (a failed one is marked missing)</text>
+
+<!-- 5. decision -->
+<rect class="dec" x="60" y="652" width="840" height="112" rx="10"/>
+<text class="t" x="80" y="676">Decision agent · gpt-6-luna · 1 call, no tools</text>
+<text class="w" x="80" y="698">Decides go / no go, weighing:</text>
+<rect x="258" y="686" width="160" height="18" rx="4" fill="#5cc58a"/><text x="266" y="699" style="font-size:11px;font-weight:600;fill:#151514">1 Goal: real user problem?</text>
+<rect x="424" y="686" width="110" height="18" rx="4" fill="#7ea2f0"/><text x="432" y="699" style="font-size:11px;font-weight:600;fill:#151514">2 Demand</text>
+<rect x="540" y="686" width="100" height="18" rx="4" fill="#a8a69e"/><text x="548" y="699" style="font-size:11px;font-weight:600;fill:#151514">3 Competitors</text>
+<rect x="646" y="686" width="160" height="18" rx="4" fill="#5a5953"/><text x="654" y="699" style="font-size:11px;font-weight:600;fill:#edece6">4 Feasibility (blocker only)</text>
+<text class="w" x="80" y="724">Writes the whole business report itself; copies numbers and links exactly, adds no facts.</text>
+<text class="s" x="80" y="746">Guards in code: "not feasible" → NO GO (banner on the report) · a missing report → confidence low</text>
+<path class="edge" d="M480 764V784" marker-end="url(#a)"/>
+
+<!-- 6. report -->
+<rect class="rep" x="60" y="786" width="840" height="150" rx="10"/>
+<text x="80" y="810" style="font-size:15px;font-weight:700;fill:#1f1e1c">Business report · the answer</text>
+<text x="300" y="810" style="font-size:12px;fill:#55534d">shown in the chat · saved to reports/&lt;date&gt;-&lt;feature&gt;.md · ⬇ Download report (.md)</text>
+<rect class="chip" x="80" y="824" width="250" height="44" rx="6"/>
+<text x="90" y="842" style="font-size:12px;font-weight:700;fill:#15803d">Recommendation ✅ GO / ⛔ NO GO</text>
+<text class="ct" x="90" y="859">Confidence · Goal · Why</text>
+<rect class="chip" x="340" y="824" width="170" height="44" rx="6"/>
+<text x="350" y="842" style="font-size:12px;font-weight:700;fill:#1f1e1c">Key evidence</text>
+<text class="ct" x="350" y="859">✅ ⛔ ➖ by area</text>
+<rect class="chip" x="520" y="824" width="180" height="44" rx="6"/>
+<text x="530" y="842" style="font-size:12px;font-weight:700;fill:#1f1e1c">Risks</text>
+<text class="ct" x="530" y="859">Before we build</text>
+<rect class="chip" x="710" y="824" width="170" height="44" rx="6"/>
+<text x="720" y="842" style="font-size:12px;font-weight:700;fill:#1f1e1c">About</text>
+<text class="ct" x="720" y="859">request · method</text>
+<rect class="chip" x="80" y="876" width="250" height="44" rx="6"/>
+<text x="90" y="894" style="font-size:12px;font-weight:700;fill:#1f1e1c">Market</text>
+<text class="ct" x="90" y="911">competitor table: has it?</text>
+<rect class="chip" x="340" y="876" width="170" height="44" rx="6"/>
+<text x="350" y="894" style="font-size:12px;font-weight:700;fill:#1f1e1c">Demand</text>
+<text class="ct" x="350" y="911">score · signals table</text>
+<rect class="chip" x="520" y="876" width="360" height="44" rx="6"/>
+<text x="530" y="894" style="font-size:12px;font-weight:700;fill:#1f1e1c">Feasibility and effort</text>
+<text class="ct" x="530" y="911">effort table · what exists · changes · architecture · open questions</text>
+
+<!-- across the run -->
+<text class="m" x="60" y="966">ACROSS THE WHOLE RUN</text>
+<rect class="box" x="60" y="976" width="270" height="62" rx="8"/>
+<text class="t2" x="74" y="996">Live panel</text>
+<text class="s" x="74" y="1014">each step: pending → running →</text>
+<text class="s" x="74" y="1029">done / waiting / error</text>
+<rect class="box" x="345" y="976" width="270" height="62" rx="8"/>
+<text class="t2" x="359" y="996">Tracing</text>
+<text class="s" x="359" y="1014">one OpenAI trace per message,</text>
+<text class="s" x="359" y="1029">a span per step · View trace ↗</text>
+<rect class="box" x="630" y="976" width="270" height="62" rx="8"/>
+<text class="t2" x="644" y="996">Failures</text>
+<text class="s" x="644" y="1014">a failed step is marked; the others</text>
+<text class="s" x="644" y="1029">continue and the report says why</text>
+</svg>

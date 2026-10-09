@@ -26,6 +26,14 @@ class Settings:
     openai_api_key: str | None
     openai_base_url: str | None
     openai_model: str
+    competitor_model: str
+    demand_model: str
+    feasibility_model: str
+    decision_model: str
+    codebase_dir: Path | None
+    team_devs: int
+    team_qa: int
+    hours_per_day: float
     agent_name: str
     agent_instructions: str
     docs_dir: Path
@@ -45,6 +53,14 @@ def load_settings() -> Settings:
         openai_api_key=os.getenv("OPENAI_API_KEY") or None,
         openai_base_url=os.getenv("OPENAI_BASE_URL") or None,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+        competitor_model=os.getenv("COMPETITOR_MODEL", "gpt-6-luna"),
+        demand_model=os.getenv("DEMAND_MODEL", "gpt-6-luna"),
+        feasibility_model=os.getenv("FEASIBILITY_MODEL", "gpt-6-luna"),
+        decision_model=os.getenv("DECISION_MODEL", "gpt-6-luna"),
+        codebase_dir=Path(os.environ["CODEBASE_DIR"]) if os.getenv("CODEBASE_DIR") else None,
+        team_devs=int(os.getenv("TEAM_DEVS", "1")),
+        team_qa=int(os.getenv("TEAM_QA", "1")),
+        hours_per_day=float(os.getenv("HOURS_PER_DAY", "5")),
         agent_name=os.getenv("AGENT_NAME", "Research Assistant"),
         agent_instructions=os.getenv(
             "AGENT_INSTRUCTIONS",

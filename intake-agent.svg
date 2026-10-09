@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 632" width="960" height="632">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:22px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.q{font-size:12px;fill:#edece6;font-style:italic}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.06em;fill:#a8a69e}
+.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#c9c7bf;white-space:pre}
+.k{fill:#a8a69e}
+.blue{fill:#7ea2f0}
+.green{fill:#5cc58a}
+.gold{fill:#d9a441}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.ask{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5a5953"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5cc58a"/>
+  </marker>
+  <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#d9a441"/>
+  </marker>
+</defs>
+
+<rect width="960" height="632" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · STEP 1</text>
+<text class="h" x="40" y="66">Intake agent</text>
+<text class="s" x="186" y="65">turns a feature request into a clear brief before research starts</text>
+
+<!-- 1. request -->
+<rect class="box" x="60" y="96" width="340" height="58" rx="10"/>
+<text class="t" x="80" y="121">Feature request</text>
+<text class="s" x="80" y="141">Your chat message, e.g. "Add membership pause"</text>
+<path class="edge" d="M230 154V176" marker-end="url(#a)"/>
+
+<!-- 2. load summary -->
+<rect class="box" x="60" y="178" width="340" height="58" rx="10"/>
+<text class="t" x="80" y="203">Load product summary</text>
+<text class="s" x="80" y="223">docs/*.pdf → plain text (pypdf), added to the prompt</text>
+<path class="edge" d="M230 236V258" marker-end="url(#a)"/>
+
+<!-- 3. intake agent / OpenAI -->
+<rect class="hot" x="60" y="260" width="340" height="92" rx="10"/>
+<text class="t" x="80" y="286">Intake agent → OpenAI</text>
+<text class="s" x="80" y="307">gpt-4.1-mini · structured output (IntakeResult)</text>
+<text class="s" x="80" y="325">Facts only from the doc, wishes only from your words</text>
+<text class="s" x="80" y="343">Retries once if the output is unusable</text>
+<path class="edge" d="M230 352V374" marker-end="url(#a)"/>
+
+<!-- decision -->
+<path d="M230 376L300 412L230 448L160 412Z" fill="#201f1d" stroke="#45443f" stroke-width="1.5"/>
+<text class="m" x="230" y="416" text-anchor="middle">status?</text>
+
+<!-- needs clarification -->
+<path d="M230 448V486" fill="none" stroke="#d9a441" stroke-width="2" marker-end="url(#ay)"/>
+<text class="m" x="240" y="472" style="fill:#d9a441">needs_clarification</text>
+<rect class="ask" x="60" y="488" width="340" height="92" rx="10"/>
+<text class="t" x="80" y="514">Ask one clarifying question</text>
+<text class="q" x="80" y="535">"Who starts the pause? [members, front-desk staff]"</text>
+<text class="s" x="80" y="553">Shown in the chat; your answer runs Intake again</text>
+<text class="s" x="80" y="571">Up to 5 questions, one per reply</text>
+
+<!-- loop back -->
+<path d="M60 534H34V306H58" fill="none" stroke="#d9a441" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ay)"/>
+<text class="m" x="26" y="420" text-anchor="middle" transform="rotate(-90 26 420)" style="fill:#d9a441">your answer</text>
+<text class="s" x="60" y="604">After 5 questions it stops and lists gaps under "unknowns".</text>
+
+<!-- ready -->
+<path d="M300 412H456" fill="none" stroke="#5cc58a" stroke-width="2" marker-end="url(#ag)"/>
+<text class="m" x="378" y="402" text-anchor="middle" style="fill:#5cc58a">ready</text>
+
+<!-- JSON panel -->
+<rect class="box" x="458" y="96" width="462" height="514" rx="10"/>
+<text class="m" x="478" y="122">OUTPUT · JSON (example)</text>
+<path d="M458 136H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="c" x="478" y="162">{</text>
+<text class="c" x="478" y="182">  <tspan class="k">"status"</tspan>: "ready",</text>
+<text class="c" x="478" y="202">  <tspan class="k">"original_query"</tspan>: "Add membership pause",</text>
+<text class="c" x="478" y="222">  <tspan class="green">"refined_query"</tspan>: "Let members pause their</text>
+<text class="c" x="478" y="242">     membership for a set period from the app",</text>
+<text class="c" x="478" y="262">  <tspan class="k">"summary"</tspan>: {</text>
+<text class="c" x="478" y="282">    <tspan class="blue">"app_summary"</tspan>: "FitSlot is a booking and</text>
+<text class="c" x="478" y="302">       membership platform for ~1,800 small</text>
+<text class="c" x="478" y="322">       fitness studios in India…",</text>
+<text class="c" x="478" y="342">    <tspan class="green">"feature_summary"</tspan>: "Members can pause…",</text>
+<text class="c" x="478" y="362">    <tspan class="k">"category"</tspan>: "fitness studio booking software"</text>
+<text class="c" x="478" y="382">  },</text>
+<text class="c" x="478" y="402">  <tspan class="gold">"sub_queries"</tspan>: [</text>
+<text class="c" x="478" y="422">    "can't pause gym membership",</text>
+<text class="c" x="478" y="442">    "freeze plan app review",</text>
+<text class="c" x="478" y="462">    "gym freeze trend India" ],</text>
+<text class="c" x="478" y="482">  <tspan class="k">"unknowns"</tspan>: ["Is a pause fee charged?"],</text>
+<text class="c" x="478" y="502">  <tspan class="k">"question"</tspan>: ""</text>
+<text class="c" x="478" y="522">}</text>
+
+<!-- legend -->
+<path d="M458 542H920" stroke="#45443f" stroke-width="1.5"/>
+<rect x="478" y="560" width="10" height="10" rx="2" fill="#7ea2f0"/>
+<text class="s" x="496" y="569">brief app summary</text>
+<rect x="628" y="560" width="10" height="10" rx="2" fill="#5cc58a"/>
+<text class="s" x="646" y="569">refined feature description</text>
+<rect x="478" y="584" width="10" height="10" rx="2" fill="#d9a441"/>
+<text class="s" x="496" y="593">sub-queries for the Demand agent: pain point · user voice · market</text>
+</svg>

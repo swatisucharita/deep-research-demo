@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1044" width="960" height="1044">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:22px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.tm{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.s2{font-size:11px;fill:#a8a69e}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.06em;fill:#a8a69e}
+.r{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#edece6}
+.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#c9c7bf;white-space:pre}
+.k{fill:#a8a69e}
+.blue{fill:#7ea2f0}
+.green{fill:#5cc58a}
+.amber{fill:#d9a441}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.gedge{fill:none;stroke:#5cc58a;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.code{fill:#17301f;stroke:#5cc58a;stroke-width:1.5}
+.rule{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5a5953"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5cc58a"/>
+  </marker>
+</defs>
+
+<rect width="960" height="1044" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · STEP 4</text>
+<text class="h" x="40" y="66">Feasibility agent</text>
+<text class="s" x="236" y="65">can we build it in our code, how, and how long will it take?</text>
+
+<!-- 1. input -->
+<rect class="box" x="60" y="96" width="360" height="58" rx="10"/>
+<text class="t" x="80" y="120">Intake brief (step 1)</text>
+<text class="s" x="80" y="141">refined_query · feature_summary · unknowns</text>
+<path class="edge" d="M240 154V174" marker-end="url(#a)"/>
+
+<!-- 2. repo map -->
+<rect class="code" x="60" y="176" width="360" height="94" rx="10"/>
+<text class="t" x="80" y="200">Code map · read from disk, no AI</text>
+<text class="s" x="80" y="221">ARCHITECTURE.md from CODEBASE_DIR (fitslot-app)</text>
+<text class="s" x="80" y="239">+ generated map: each file and its exported names</text>
+<text class="s" x="80" y="257">Skips .env, keys, images, lockfiles, .db</text>
+<path class="edge" d="M240 270V290" marker-end="url(#a)"/>
+
+<!-- 3. feasibility agent -->
+<rect class="hot" x="60" y="292" width="360" height="112" rx="10"/>
+<text class="t" x="80" y="316">Feasibility agent → OpenAI</text>
+<text class="s" x="80" y="337">gpt-6-luna · medium reasoning · up to 15 turns</text>
+<text class="s" x="80" y="355">Uses the map to know where to look, then reads</text>
+<text class="s" x="80" y="373">the exact lines behind every reference it cites</text>
+<text class="s" x="80" y="391">Returns: exists · must change · architecture</text>
+
+<!-- tool loop -->
+<path d="M200 404V434" fill="none" stroke="#5cc58a" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ag)"/>
+<path d="M280 436V406" fill="none" stroke="#5cc58a" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ag)"/>
+<text class="m" x="190" y="424" text-anchor="end" style="fill:#5cc58a">call</text>
+<text class="m" x="290" y="424" style="fill:#5cc58a">result · repeats</text>
+
+<!-- 4. tools -->
+<rect class="code" x="60" y="438" width="112" height="66" rx="10"/>
+<text class="tm" x="72" y="460">list_files</text>
+<text class="s2" x="72" y="479">browse folders</text>
+<text class="s2" x="72" y="495">and file names</text>
+
+<rect class="code" x="184" y="438" width="112" height="66" rx="10"/>
+<text class="tm" x="196" y="460">search_code</text>
+<text class="s2" x="196" y="479">find text: file,</text>
+<text class="s2" x="196" y="495">line, snippet</text>
+
+<rect class="code" x="308" y="438" width="112" height="66" rx="10"/>
+<text class="tm" x="320" y="460">read_file</text>
+<text class="s2" x="320" y="479">lines a–b of</text>
+<text class="s2" x="320" y="495">one file</text>
+
+<text class="s" x="60" y="524">Run locally, read-only · only the loaded repo files</text>
+<text class="s" x="60" y="542">Max 12k chars per result, 120k per run</text>
+<path class="edge" d="M240 550V570" marker-end="url(#a)"/>
+
+<!-- 5. check in code -->
+<rect class="rule" x="60" y="572" width="360" height="94" rx="10"/>
+<text class="t" x="80" y="596">Check in code</text>
+<text class="s" x="80" y="617">Each ref: file exists and lines are in range</text>
+<text class="s" x="80" y="635">Unverified "modify" → its estimate widened ×1.5</text>
+<text class="s" x="80" y="653">files_read and tool_calls taken from the tool calls</text>
+<path class="edge" d="M240 666V686" marker-end="url(#a)"/>
+
+<!-- 6. effort in code -->
+<rect class="box" x="60" y="688" width="360" height="150" rx="10"/>
+<text class="t" x="80" y="712">Effort · computed in code</text>
+<text class="r" x="80" y="736">S   5–10 h  small, contained change</text>
+<text class="r" x="80" y="754">M  15–25 h  several functions, a screen</text>
+<text class="r" x="80" y="772">L  30–50 h  new subsystem, migration</text>
+<text class="s" x="80" y="798">Dev hours = sum of changes · QA +30% · buffer +15%</text>
+<text class="s" x="80" y="816">Team size from .env: devs, QA, hours per day</text>
+<text class="s" x="80" y="832">→ hours, people and calendar weeks</text>
+
+<!-- to output -->
+<path class="gedge" d="M420 762H436V420H456" marker-end="url(#ag)"/>
+
+<!-- architecture as shown in the report -->
+<text class="m" x="60" y="868">ARCHITECTURE IN THE REPORT (a table)</text>
+<rect class="box" x="60" y="878" width="360" height="100" rx="8"/>
+<text class="s" x="76" y="900">⚪ Reminder cron route · existing</text>
+<text class="s" x="76" y="918">🟡 Class reminder job · changed</text>
+<text class="s" x="76" y="936">🟡 Notification registry · changed</text>
+<text class="s" x="76" y="954">🟢 WhatsApp channel + provider · new</text>
+<text class="s" x="76" y="972" style="font-style:italic">Flow: cron → reminder job → registry → WhatsApp</text>
+
+<text class="s" x="60" y="1004">Only the maps and the lines it reads go to OpenAI · no web search</text>
+<text class="s" x="60" y="1022">Runs alongside Competitor and Demand · "Feasibility and effort" section</text>
+
+<!-- JSON panel -->
+<rect class="box" x="458" y="96" width="462" height="882" rx="10"/>
+<text class="m" x="478" y="122">OUTPUT · JSON (WhatsApp reminders, test run)</text>
+<path d="M458 136H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="c" x="478" y="162">{</text>
+<text class="c" x="478" y="182">  <tspan class="k">"feasibility"</tspan>: <tspan class="green">"feasible with changes"</tspan>,</text>
+<text class="c" x="478" y="202">  <tspan class="k">"reason"</tspan>: "Reminder job and channel</text>
+<text class="c" x="478" y="222">     registry exist; no WhatsApp channel",</text>
+<text class="c" x="478" y="242">  <tspan class="blue">"already_present"</tspan>: [</text>
+<text class="c" x="478" y="262">    { "path": "src/lib/notifications/</text>
+<text class="c" x="478" y="282">               reminders.ts",</text>
+<text class="c" x="478" y="302">      "start_line": 12, "end_line": 30,</text>
+<text class="c" x="478" y="322">      "verified": true }, … ],</text>
+<text class="c" x="478" y="342">  <tspan class="amber">"changes"</tspan>: [</text>
+<text class="c" x="478" y="362">    { "area": "member consent", "size": "S",</text>
+<text class="c" x="478" y="382">      "change": "modify", "hours": "5–10" },</text>
+<text class="c" x="478" y="402">    { "area": "WhatsApp channel", "size": "M",</text>
+<text class="c" x="478" y="422">      "change": "modify", "hours": "15–25" },</text>
+<text class="c" x="478" y="442">    … 6 changes ],</text>
+<text class="c" x="478" y="462">  <tspan class="green">"components"</tspan>: [ { "name": "WhatsApp</text>
+<text class="c" x="478" y="482">      channel", "status": "new", … }, … ],</text>
+<text class="c" x="478" y="502">  <tspan class="green">"flow"</tspan>: [ { "source": "Class reminder job",</text>
+<text class="c" x="478" y="522">      "target": "Notification registry" }, … ],</text>
+<text class="c" x="478" y="542">  <tspan class="k">"effort"</tspan>: {</text>
+<text class="c" x="478" y="562">    "dev_hours": "50–90", "qa_hours": "15–27",</text>
+<text class="c" x="478" y="582">    "people": "1 dev + 1 QA",</text>
+<text class="c" x="478" y="602">    "weeks": "2.5–4.5" },</text>
+<text class="c" x="478" y="622">  <tspan class="k">"open_questions"</tspan>: [</text>
+<text class="c" x="478" y="642">    "Which plans include WhatsApp?",</text>
+<text class="c" x="478" y="662">    "Which WhatsApp template?", … ],</text>
+<text class="c" x="478" y="682">  <tspan class="k">"files_read"</tspan>: [ "prisma/schema.prisma",</text>
+<text class="c" x="478" y="702">    "src/lib/billing.ts", … 9 files ],</text>
+<text class="c" x="478" y="722">  <tspan class="k">"tool_calls"</tspan>: 9</text>
+<text class="c" x="478" y="742">}</text>
+
+<!-- legend -->
+<path d="M458 790H920" stroke="#45443f" stroke-width="1.5"/>
+<rect x="478" y="808" width="10" height="10" rx="2" fill="#7ea2f0"/>
+<text class="s" x="496" y="817">infra already present</text>
+<rect x="640" y="808" width="10" height="10" rx="2" fill="#d9a441"/>
+<text class="s" x="658" y="817">what needs to change</text>
+<rect x="478" y="832" width="10" height="10" rx="2" fill="#5cc58a"/>
+<text class="s" x="496" y="841">architecture: components (new · changed · existing) + flow</text>
+<text class="s" x="478" y="865">effort: hours and people computed in code, not by the model</text>
+<text class="s" x="478" y="889">files_read: what the agent actually opened, from the tool calls</text>
+</svg>

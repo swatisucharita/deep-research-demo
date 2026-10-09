@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 722" width="960" height="722">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:22px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.t2{font-size:13px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.s2{font-size:11px;fill:#a8a69e}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.06em;fill:#a8a69e}
+.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#c9c7bf;white-space:pre}
+.k{fill:#a8a69e}
+.blue{fill:#7ea2f0}
+.green{fill:#5cc58a}
+.amber{fill:#d9a441}
+.red{fill:#e0736a}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.gedge{fill:none;stroke:#5cc58a;stroke-width:2}
+.aedge{fill:none;stroke:#d9a441;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.web{fill:#17301f;stroke:#5cc58a;stroke-width:1.5}
+.rule{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5a5953"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5cc58a"/>
+  </marker>
+  <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#d9a441"/>
+  </marker>
+</defs>
+
+<rect width="960" height="722" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · STEP 2</text>
+<text class="h" x="40" y="66">Competitor agent</text>
+<text class="s" x="232" y="65">who else solves this, and do they already have the feature?</text>
+
+<!-- 1. input from intake -->
+<rect class="box" x="60" y="96" width="360" height="58" rx="10"/>
+<text class="t" x="80" y="120">Intake brief (step 1)</text>
+<text class="s" x="80" y="141">app_summary + refined_query, when "ready"</text>
+<path class="edge" d="M240 154V174" marker-end="url(#a)"/>
+
+<!-- 2. main search -->
+<rect class="hot" x="60" y="176" width="360" height="92" rx="10"/>
+<text class="t" x="80" y="202">Competitor agent · 1 web search</text>
+<text class="s" x="80" y="223">gpt-6-luna · low reasoning · results biased to India</text>
+<text class="s" x="80" y="241">Finds up to 5 competitors and rates each one,</text>
+<text class="s" x="80" y="259">only from what the search returned</text>
+<path class="edge" d="M240 268V288" marker-end="url(#a)"/>
+
+<!-- 3. rating rule -->
+<rect class="rule" x="60" y="290" width="360" height="110" rx="10"/>
+<text class="t" x="80" y="316">Rating rule · prompt + code</text>
+<text class="s" x="80" y="337">yes: a source confirms who, what and where</text>
+<text class="s" x="80" y="355">not_confirmed lists what's missing → "partial"</text>
+<text class="s" x="80" y="373">Evidence URL not in the results → "unclear"</text>
+<text class="s" x="80" y="391">Limits like "up to 3 months" don't change the rating</text>
+
+<!-- fork to rechecks -->
+<path class="aedge" d="M240 400V414"/>
+<path class="aedge" d="M116 414H364"/>
+<path class="aedge" d="M116 414V432" marker-end="url(#ay)"/>
+<path class="aedge" d="M240 414V432" marker-end="url(#ay)"/>
+<path class="aedge" d="M364 414V432" marker-end="url(#ay)"/>
+<text class="m" x="126" y="428" style="fill:#d9a441">unclear only</text>
+
+<!-- 4. rechecks -->
+<rect class="web" x="60" y="434" width="112" height="76" rx="10"/>
+<text class="t2" x="72" y="456">Recheck B</text>
+<text class="s2" x="72" y="475">1 search, once</text>
+<text class="s2" x="72" y="492">on B's own site</text>
+
+<rect class="web" x="184" y="434" width="112" height="76" rx="10"/>
+<text class="t2" x="196" y="456">Recheck D</text>
+<text class="s2" x="196" y="475">1 search, once</text>
+<text class="s2" x="196" y="492">on D's own site</text>
+
+<rect class="web" x="308" y="434" width="112" height="76" rx="10"/>
+<text class="t2" x="320" y="456">Recheck E</text>
+<text class="s2" x="320" y="475">1 search, once</text>
+<text class="s2" x="320" y="492">on E's own site</text>
+
+<text class="s" x="60" y="530">Once each, in parallel (asyncio.gather) · no second round</text>
+
+<!-- merge -->
+<path class="edge" d="M240 536V556" marker-end="url(#a)"/>
+
+<!-- 5. report -->
+<rect class="box" x="60" y="558" width="360" height="76" rx="10"/>
+<text class="t" x="80" y="582">Report · built in code</text>
+<text class="s" x="80" y="603">Still unclear after its recheck → stays "unclear"</text>
+<text class="s" x="80" y="621">Summary from the final ratings · searches counted</text>
+
+<!-- to output -->
+<path class="gedge" d="M420 596H436V340H456" marker-end="url(#ag)"/>
+
+<text class="s" x="60" y="660">At most 6 searches (1 + one per unclear) · about 7–13 s</text>
+<text class="s" x="60" y="678">Becomes the "Market" section of the business report</text>
+<text class="s" x="60" y="696">If it fails, the report notes it; the other steps continue</text>
+
+<!-- JSON panel -->
+<rect class="box" x="458" y="96" width="462" height="564" rx="10"/>
+<text class="m" x="478" y="122">OUTPUT · JSON (example)</text>
+<path d="M458 136H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="c" x="478" y="162">{</text>
+<text class="c" x="478" y="182">  <tspan class="k">"feature"</tspan>: "Let members pause their</text>
+<text class="c" x="478" y="202">     membership from the app",</text>
+<text class="c" x="478" y="222">  <tspan class="k">"competitors"</tspan>: [</text>
+<text class="c" x="478" y="242">    { <tspan class="k">"name"</tspan>: "Competitor A",</text>
+<text class="c" x="478" y="262">      <tspan class="k">"website"</tspan>: "https://…",</text>
+<text class="c" x="478" y="282">      <tspan class="k">"has_feature"</tspan>: <tspan class="blue">"partial"</tspan>,</text>
+<text class="c" x="478" y="302">      <tspan class="k">"evidence"</tspan>: "Members request a</text>
+<text class="c" x="478" y="322">         freeze; the owner approves it",</text>
+<text class="c" x="478" y="342">      <tspan class="amber">"not_confirmed"</tspan>: [</text>
+<text class="c" x="478" y="362">         "Who: members can't pause it</text>
+<text class="c" x="478" y="382">          themselves" ],</text>
+<text class="c" x="478" y="402">      <tspan class="k">"source_url"</tspan>: "https://…" },</text>
+<text class="c" x="478" y="422">    { <tspan class="k">"name"</tspan>: "Competitor B", …,</text>
+<text class="c" x="478" y="442">      <tspan class="k">"has_feature"</tspan>: <tspan class="red">"no"</tspan> },  <tspan class="k">// recheck</tspan></text>
+<text class="c" x="478" y="462">    { <tspan class="k">"name"</tspan>: "Competitor C", …,</text>
+<text class="c" x="478" y="482">      <tspan class="k">"has_feature"</tspan>: <tspan class="green">"yes"</tspan>,</text>
+<text class="c" x="478" y="502">      <tspan class="amber">"not_confirmed"</tspan>: [] },</text>
+<text class="c" x="478" y="522">    …  up to 5</text>
+<text class="c" x="478" y="542">  ],</text>
+<text class="c" x="478" y="562">  <tspan class="k">"summary"</tspan>: "1 of 5 have it · 3 partial · 1 no",</text>
+<text class="c" x="478" y="582">  <tspan class="k">"searches"</tspan>: 3</text>
+<text class="c" x="478" y="602">}</text>
+
+<!-- legend -->
+<path d="M458 618H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="s" x="478" y="644">has_feature:</text>
+<rect x="556" y="635" width="10" height="10" rx="2" fill="#5cc58a"/>
+<text class="s" x="572" y="644">yes</text>
+<rect x="606" y="635" width="10" height="10" rx="2" fill="#7ea2f0"/>
+<text class="s" x="622" y="644">partial</text>
+<rect x="676" y="635" width="10" height="10" rx="2" fill="#e0736a"/>
+<text class="s" x="692" y="644">no (a source says so)</text>
+<rect x="822" y="635" width="10" height="10" rx="2" fill="#d9a441"/>
+<text class="s" x="838" y="644">unclear</text>
+</svg>

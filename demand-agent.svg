@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 910" width="960" height="910">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:22px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.t2{font-size:13px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.s2{font-size:11px;fill:#a8a69e}
+.s3{font-size:10px;fill:#a8a69e}
+.q{font-size:11px;fill:#edece6;font-style:italic}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.06em;fill:#a8a69e}
+.r{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#edece6}
+.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#c9c7bf;white-space:pre}
+.k{fill:#a8a69e}
+.blue{fill:#7ea2f0}
+.green{fill:#5cc58a}
+.amber{fill:#d9a441}
+.red{fill:#e0736a}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.bedge{fill:none;stroke:#7ea2f0;stroke-width:2}
+.gedge{fill:none;stroke:#5cc58a;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.chip{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.2}
+.web{fill:#17301f;stroke:#5cc58a;stroke-width:1.5}
+.ok{fill:#17301f;stroke:#5cc58a;stroke-width:1.2}
+.no{fill:#201f1d;stroke:#5a5953;stroke-width:1.2;stroke-dasharray:5 4}
+.rule{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5a5953"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#7ea2f0"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5cc58a"/>
+  </marker>
+</defs>
+
+<rect width="960" height="910" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · STEP 3 · DESIGN</text>
+<text class="h" x="40" y="66">Demand agent</text>
+<text class="s" x="204" y="65">do people actually want this feature?</text>
+
+<!-- 1. input -->
+<rect class="box" x="60" y="96" width="360" height="58" rx="10"/>
+<text class="t" x="80" y="120">Intake brief (step 1)</text>
+<text class="s" x="80" y="141">refined_query · app_summary · 3 sub_queries</text>
+
+<!-- fork to chips -->
+<path class="bedge" d="M240 154V164"/>
+<path class="bedge" d="M116 164H364"/>
+<path class="bedge" d="M116 164V182" marker-end="url(#ab)"/>
+<path class="bedge" d="M240 164V182" marker-end="url(#ab)"/>
+<path class="bedge" d="M364 164V182" marker-end="url(#ab)"/>
+<text class="m" x="126" y="178" style="fill:#7ea2f0">from Intake</text>
+
+<!-- 2. sub-query chips -->
+<rect class="chip" x="60" y="184" width="112" height="72" rx="10"/>
+<text class="t2" x="72" y="204">1 Pain point</text>
+<text class="q" x="72" y="223">"can't pause gym</text>
+<text class="q" x="72" y="240">membership"</text>
+
+<rect class="chip" x="184" y="184" width="112" height="72" rx="10"/>
+<text class="t2" x="196" y="204">2 User voice</text>
+<text class="q" x="196" y="223">"freeze plan</text>
+<text class="q" x="196" y="240">app review"</text>
+
+<rect class="chip" x="308" y="184" width="112" height="72" rx="10"/>
+<text class="t2" x="320" y="204">3 Market</text>
+<text class="q" x="320" y="223">"gym freeze</text>
+<text class="q" x="320" y="240">trend India"</text>
+
+<!-- merge into the agent -->
+<path class="edge" d="M116 256V268H364V256"/>
+<path class="edge" d="M240 256V268"/>
+<path class="edge" d="M240 268V286" marker-end="url(#a)"/>
+
+<!-- 3. demand agent -->
+<rect class="hot" x="60" y="288" width="360" height="74" rx="10"/>
+<text class="t" x="80" y="312">Demand agent → OpenAI</text>
+<text class="s" x="80" y="333">gpt-6-luna · low reasoning · results biased to India</text>
+<text class="s" x="80" y="351">Runs Intake's 3 sub-queries; writes none of its own</text>
+<path class="gedge" d="M240 362V382" marker-end="url(#ag)"/>
+<text class="m" x="250" y="378" style="fill:#5cc58a">all 3 in one call</text>
+
+<!-- 4. one web search -->
+<rect class="web" x="60" y="384" width="360" height="62" rx="10"/>
+<text class="t" x="80" y="408">Web search · 1 call · 3 queries</text>
+<text class="s" x="80" y="429">All domains (no site filter) · max_tool_calls=1 · once</text>
+<path class="edge" d="M240 446V466" marker-end="url(#a)"/>
+
+<!-- 5. sorted by URL -->
+<text class="s" x="60" y="482">Each result sorted by its URL, in code</text>
+<rect class="ok" x="60" y="490" width="84" height="70" rx="8"/>
+<text class="t2" x="70" y="510">Forum</text>
+<text class="s3" x="68" y="528">reddit · quora</text>
+<text class="s2 green" x="70" y="548">✓ counts</text>
+
+<rect class="ok" x="152" y="490" width="84" height="70" rx="8"/>
+<text class="t2" x="162" y="510">Review</text>
+<text class="s3" x="160" y="528">G2 · Capterra</text>
+<text class="s2 green" x="162" y="548">✓ counts</text>
+
+<rect class="ok" x="244" y="490" width="84" height="70" rx="8"/>
+<text class="t2" x="254" y="510">News</text>
+<text class="s3" x="252" y="528">news · reports</text>
+<text class="s2 green" x="254" y="548">✓ counts</text>
+
+<rect class="no" x="336" y="490" width="84" height="70" rx="8"/>
+<text class="t2" x="346" y="510" style="fill:#a8a69e">Other</text>
+<text class="s3" x="344" y="528">vendor pages</text>
+<text class="s2 red" x="346" y="548">✗ ignored</text>
+<path class="edge" d="M240 560V580" marker-end="url(#a)"/>
+
+<!-- 6. check in code -->
+<rect class="rule" x="60" y="582" width="360" height="94" rx="10"/>
+<text class="t" x="80" y="606">Check in code</text>
+<text class="s" x="80" y="627">Signal URL not in the search results → dropped</text>
+<text class="s" x="80" y="645">Duplicates removed · counted by source, kind, who</text>
+<text class="s" x="80" y="663">Logs which sub-queries the search actually ran</text>
+<path class="edge" d="M240 676V696" marker-end="url(#a)"/>
+
+<!-- 7. score in code -->
+<rect class="box" x="60" y="698" width="360" height="150" rx="10"/>
+<text class="t" x="80" y="722">Score 1–5 · computed in code</text>
+<text class="r" x="80" y="745">1  no signals found</text>
+<text class="r" x="80" y="763">2  a few signals, one source</text>
+<text class="r" x="80" y="781">3  repeated, one source only</text>
+<text class="r" x="80" y="799">4  2+ sources, incl. complaints</text>
+<text class="r" x="80" y="817">5  as 4, plus news or market data</text>
+<text class="s" x="80" y="839">"No signals found" is not "no demand"</text>
+
+<!-- to output -->
+<path class="gedge" d="M420 772H436V400H456" marker-end="url(#ag)"/>
+
+<text class="s" x="60" y="874">1 search · about 4–6 s · no analyst model call</text>
+<text class="s" x="60" y="892">Runs alongside Competitor and Feasibility · "Demand" section of the report</text>
+
+<!-- JSON panel -->
+<rect class="box" x="458" y="96" width="462" height="752" rx="10"/>
+<text class="m" x="478" y="122">OUTPUT · JSON (example)</text>
+<path d="M458 136H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="c" x="478" y="162">{</text>
+<text class="c" x="478" y="182">  <tspan class="k">"feature"</tspan>: "Let members pause their</text>
+<text class="c" x="478" y="202">     membership from the app",</text>
+<text class="c" x="478" y="222">  <tspan class="blue">"sub_queries"</tspan>: [  <tspan class="k">// from Intake</tspan></text>
+<text class="c" x="478" y="242">    "can't pause gym membership",</text>
+<text class="c" x="478" y="262">    "freeze plan app review",</text>
+<text class="c" x="478" y="282">    "gym freeze trend India" ],</text>
+<text class="c" x="478" y="302">  <tspan class="k">"score"</tspan>: <tspan class="green">4</tspan>,</text>
+<text class="c" x="478" y="322">  <tspan class="k">"score_reason"</tspan>: "6 signals from forums</text>
+<text class="c" x="478" y="342">     and reviews, incl. complaints",</text>
+<text class="c" x="478" y="362">  <tspan class="k">"counts"</tspan>: { "forum": 4, "review": 2,</text>
+<text class="c" x="478" y="382">              "news": 0, "other": 1 },</text>
+<text class="c" x="478" y="402">  <tspan class="k">"who"</tspan>: { "member": 5, "studio": 1 },</text>
+<text class="c" x="478" y="422">  <tspan class="k">"signals"</tspan>: [</text>
+<text class="c" x="478" y="442">    { <tspan class="k">"sub_query"</tspan>: 1,</text>
+<text class="c" x="478" y="462">      <tspan class="k">"source"</tspan>: "forum",  <tspan class="k">// from the URL</tspan></text>
+<text class="c" x="478" y="482">      <tspan class="k">"kind"</tspan>: <tspan class="amber">"complaint"</tspan>,</text>
+<text class="c" x="478" y="502">      <tspan class="k">"who"</tspan>: "member",</text>
+<text class="c" x="478" y="522">      <tspan class="k">"quote"</tspan>: "Wish I could freeze my</text>
+<text class="c" x="478" y="542">         membership from the app…",</text>
+<text class="c" x="478" y="562">      <tspan class="k">"url"</tspan>: "https://reddit.com/…",</text>
+<text class="c" x="478" y="582">      <tspan class="k">"date"</tspan>: "2026-03" },</text>
+<text class="c" x="478" y="602">    { <tspan class="k">"sub_query"</tspan>: 2, "source": "review",</text>
+<text class="c" x="478" y="622">      <tspan class="k">"kind"</tspan>: <tspan class="amber">"complaint"</tspan>, … },</text>
+<text class="c" x="478" y="642">    …  up to 8</text>
+<text class="c" x="478" y="662">  ],</text>
+<text class="c" x="478" y="682">  <tspan class="k">"searches"</tspan>: 1</text>
+<text class="c" x="478" y="702">}</text>
+
+<!-- legend -->
+<path d="M458 724H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="s" x="478" y="750">kind: request · complaint · workaround ·</text>
+<text class="s" x="478" y="768">      competitor praise · market data</text>
+<text class="s" x="478" y="792">who: member · studio staff · unknown</text>
+<text class="s" x="478" y="816">source: set from the URL; "other" doesn't count</text>
+</svg>

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 836" width="960" height="836">
+<style>
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.h{font-size:22px;font-weight:700;fill:#edece6}
+.t{font-size:15px;font-weight:600;fill:#edece6}
+.t2{font-size:13px;font-weight:600;fill:#edece6}
+.s{font-size:12px;fill:#a8a69e}
+.s2{font-size:11px;fill:#a8a69e}
+.b{font-size:12px;font-weight:600;fill:#151514}
+.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.06em;fill:#a8a69e}
+.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;fill:#c9c7bf;white-space:pre}
+.k{fill:#a8a69e}
+.blue{fill:#7ea2f0}
+.green{fill:#5cc58a}
+.amber{fill:#d9a441}
+.red{fill:#e0736a}
+.edge{fill:none;stroke:#5a5953;stroke-width:2}
+.gedge{fill:none;stroke:#5cc58a;stroke-width:2}
+.box{fill:#201f1d;stroke:#45443f;stroke-width:1.5}
+.hot{fill:#1d2a45;stroke:#7ea2f0;stroke-width:1.5}
+.chip{fill:#201f1d;stroke:#5a5953;stroke-width:1.2}
+.rule{fill:#2d2617;stroke:#d9a441;stroke-width:1.5}
+.code{fill:#17301f;stroke:#5cc58a;stroke-width:1.5}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5a5953"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0L10 5L0 10z" fill="#5cc58a"/>
+  </marker>
+</defs>
+
+<rect width="960" height="836" rx="16" fill="#151514"/>
+
+<!-- header -->
+<text class="m" x="40" y="38">DEEP-RESEARCH-DEMO · STEP 5 · FINAL</text>
+<text class="h" x="40" y="66">Decision agent</text>
+<text class="s" x="214" y="65">decides go or no go, led by the goal, and writes the report</text>
+
+<!-- 1. inputs -->
+<rect class="box" x="60" y="96" width="360" height="58" rx="10"/>
+<text class="t" x="80" y="120">Intake brief · where the goal comes from</text>
+<text class="s" x="80" y="141">feature · feature summary · product summary · unknowns</text>
+
+<rect class="chip" x="60" y="166" width="112" height="62" rx="10"/>
+<text class="t2" x="72" y="187">Competitor</text>
+<text class="s2" x="72" y="205">who has it:</text>
+<text class="s2" x="72" y="220">yes · partial · no</text>
+
+<rect class="chip" x="184" y="166" width="112" height="62" rx="10"/>
+<text class="t2" x="196" y="187">Demand</text>
+<text class="s2" x="196" y="205">score 1–5 and</text>
+<text class="s2" x="196" y="220">signals</text>
+
+<rect class="chip" x="308" y="166" width="112" height="62" rx="10"/>
+<text class="t2" x="320" y="187">Feasibility</text>
+<text class="s2" x="320" y="205">feasible? effort,</text>
+<text class="s2" x="320" y="220">changes</text>
+
+<!-- merge -->
+<path class="edge" d="M116 228V242H364V228"/>
+<path class="edge" d="M240 228V242"/>
+<path class="edge" d="M240 154V166" style="stroke-dasharray:3 3"/>
+<path class="edge" d="M240 242V262" marker-end="url(#a)"/>
+<text class="m" x="250" y="258">all inputs as JSON</text>
+
+<!-- 2. decision agent -->
+<rect class="hot" x="60" y="264" width="360" height="92" rx="10"/>
+<text class="t" x="80" y="290">Decision agent → OpenAI</text>
+<text class="s" x="80" y="311">gpt-6-luna · medium reasoning · 1 call, no tools</text>
+<text class="s" x="80" y="329">Uses only the inputs; copies numbers and links exactly</text>
+<text class="s" x="80" y="347">Returns decision · confidence · the full report</text>
+<path class="edge" d="M240 356V376" marker-end="url(#a)"/>
+
+<!-- 3. priority ladder -->
+<rect class="rule" x="60" y="378" width="360" height="176" rx="10"/>
+<text class="t" x="80" y="402">Priority in the prompt</text>
+<rect x="80" y="414" width="320" height="24" rx="5" fill="#5cc58a"/>
+<text class="b" x="90" y="431">1 Goal · solves a real user problem?</text>
+<rect x="80" y="444" width="250" height="24" rx="5" fill="#7ea2f0"/>
+<text class="b" x="90" y="461">2 Demand · do people want it?</text>
+<rect x="80" y="474" width="200" height="24" rx="5" fill="#a8a69e"/>
+<text class="b" x="90" y="491">3 Competitors · gap?</text>
+<rect x="80" y="504" width="150" height="24" rx="5" fill="#5a5953"/>
+<text class="b" x="90" y="521" style="fill:#edece6">4 Feasibility</text>
+<text class="s" x="240" y="521">blocker only</text>
+<text class="s" x="80" y="545">No clear goal → no go, however cheap or common</text>
+<path class="edge" d="M240 554V574" marker-end="url(#a)"/>
+
+<!-- 4. guards in code -->
+<rect class="code" x="60" y="576" width="360" height="76" rx="10"/>
+<text class="t" x="80" y="600">Guards in code</text>
+<text class="s" x="80" y="621">"Not feasible" → NO GO, with a banner on the report</text>
+<text class="s" x="80" y="639">A report missing → confidence low; its section says why</text>
+<path class="edge" d="M240 652V672" marker-end="url(#a)"/>
+
+<!-- 5. report -->
+<rect class="box" x="60" y="674" width="360" height="94" rx="10"/>
+<text class="t" x="80" y="698">The report is the answer</text>
+<text class="s" x="80" y="719">Shown in the chat as written by the agent</text>
+<text class="s" x="80" y="737">Saved to reports/&lt;date&gt;-&lt;feature&gt;.md</text>
+<text class="s" x="80" y="755">⬇ Download report (.md) under the panel</text>
+
+<!-- to output -->
+<path class="gedge" d="M420 316H436V300H456" marker-end="url(#ag)"/>
+
+<text class="s" x="60" y="796">Runs after Competitor, Demand and Feasibility finish</text>
+<text class="s" x="60" y="814">If it fails, the chat says why and lists any failed steps</text>
+
+<!-- output panel: decision + the report it writes -->
+<rect class="box" x="458" y="96" width="462" height="672" rx="10"/>
+<text class="m" x="478" y="122">OUTPUT · decision, confidence + report</text>
+<path d="M458 136H920" stroke="#45443f" stroke-width="1.5"/>
+<text class="c" x="478" y="162"><tspan class="k">"decision"</tspan>: <tspan class="green">"go"</tspan>,  <tspan class="k">"confidence"</tspan>: "medium",</text>
+<text class="c" x="478" y="182"><tspan class="k">"report"</tspan>: (Markdown, written by the agent)</text>
+<rect x="478" y="196" width="422" height="514" rx="8" fill="#f6f5f1"/>
+<text x="494" y="224" style="font-size:16px;font-weight:700;fill:#1f1e1c">Feature assessment: WhatsApp reminders</text>
+<text x="494" y="242" style="font-size:11px;font-style:italic;fill:#6b6a64">09 October 2026 · FitSlot feature research</text>
+<text x="494" y="270" style="font-size:14px;font-weight:700;fill:#15803d">Recommendation: ✅ GO</text>
+<text x="494" y="290" style="font-size:12px;fill:#1f1e1c"><tspan font-weight="700">Confidence:</tspan> Medium</text>
+<text x="494" y="308" style="font-size:12px;fill:#1f1e1c"><tspan font-weight="700">Goal.</tspan> Help members remember booked classes…</text>
+<text x="494" y="326" style="font-size:12px;fill:#1f1e1c"><tspan font-weight="700">Why.</tspan> Fits FitSlot's purpose; feasible; demand…</text>
+<text x="494" y="352" style="font-size:12px;font-weight:700;fill:#1f1e1c">Key evidence</text>
+<rect x="494" y="360" width="390" height="70" rx="4" fill="none" stroke="#c9c7bf"/>
+<text x="502" y="377" style="font-size:11px;fill:#1f1e1c">✅  Goal          Reminders for booked classes</text>
+<text x="502" y="394" style="font-size:11px;fill:#1f1e1c">➖  Demand       No signals found</text>
+<text x="502" y="411" style="font-size:11px;fill:#1f1e1c">✅  Feasibility  Reminder job + channels exist</text>
+<text x="502" y="425" style="font-size:10px;fill:#6b6a64">…</text>
+<text x="494" y="452" style="font-size:12px;font-weight:700;fill:#1f1e1c">Risks · Before we build</text>
+<text x="494" y="470" style="font-size:11px;fill:#3b3a36">• Demand not validated  • Choose a provider …</text>
+<path d="M494 486H884" stroke="#c9c7bf"/>
+<text x="494" y="508" style="font-size:13px;font-weight:700;fill:#1f1e1c">Market: what competitors offer</text>
+<text x="494" y="526" style="font-size:11px;fill:#3b3a36">table: competitor · has it · source</text>
+<text x="494" y="552" style="font-size:13px;font-weight:700;fill:#1f1e1c">Demand: do people want it?</text>
+<text x="494" y="570" style="font-size:11px;fill:#3b3a36">score 1/5 · queries · signals table</text>
+<text x="494" y="596" style="font-size:13px;font-weight:700;fill:#1f1e1c">Feasibility and effort</text>
+<text x="494" y="614" style="font-size:11px;fill:#3b3a36">effort table · what exists · changes · architecture</text>
+<path d="M494 630H884" stroke="#c9c7bf"/>
+<text x="494" y="652" style="font-size:13px;font-weight:700;fill:#1f1e1c">About this assessment</text>
+<text x="494" y="670" style="font-size:11px;fill:#3b3a36">request · product · details not specified · method</text>
+<text x="494" y="696" style="font-size:10px;fill:#6b6a64">(illustration of the structure the prompt requires)</text>
+
+<!-- legend -->
+<text class="s" x="478" y="736">Evidence: ✅ go · ⛔ no go · ➖ neutral (e.g. nothing found)</text>
+<text class="s" x="478" y="756">Confidence: low · medium · high (low if a report is missing)</text>
+</svg>
+</svg>
